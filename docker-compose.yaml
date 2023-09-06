@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  goapp: .
+  volumes:
+    - .:/go/src/github.com/username/goapp
+  platform: linux/amd64
+  ports: 
+    - 8080:8080
+  extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: products
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./mysql:/var/lib/mysql
